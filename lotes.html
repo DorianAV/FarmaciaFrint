@@ -1,45 +1,37 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script type="text/javascript" src="js/jquery-3.7.1.js"></script>
-    <script type="text/javascript" src="js/bootstrap.bundle.js"></script>
-    <script type="text/javascript" src="js/jquery.validate.min.js"></script>
-    <link type="text/css" rel="Stylesheet" href="css/bootstrap.css">
-    <title>Lotes</title>
-</head>
-<body>
-    <div class="container mt-5">
-        <div class="card col-md-7 mx-auto border-primary shadow">
-            <div class="card-body">
-                <form>
-                    <fieldset>
-                        <legend class="text-center">Registrar Lotes</legend>
-                        <div class="form-group">
-                            <label for="lote" class="form-label mt-6">Existencias:</label>
-                            <input type="number" class="form-control" id="lote" placeholder="Escribe número de exitencias del lote">
-                        </div>
-                        <div class="form-group">
-                            <label for="cad_lote" class="form-label mt-4">Fecha de caducidad:</label>
-                            <input type="date" class="form-control" id="cad_lote" placeholder="Escribe la fecha de caducidad del lote" autocomplete="off">
-                        </div>
-                        <div class="form-group">
-                            <label for="fab_lote" class="form-label mt-4">Fecha de fabricación:</label>
-                            <input type="date" class="form-control" id="fab_lote" placeholder="Escribe la fecha de fabricación del lote" autocomplete="off">
-                        </div>
-                        <div class="form-group">
-                            <label for="nombre_med" class="form-label mt-4">Nombre del medicamento:</label>
-                            <input type="text" class="form-control" id="nombre_med" placeholder="Escribe el nombre del medicamento" autocomplete="off">
-                        </div>
-                        <div class="form-group">
-                            <button type="button" class="btn btn-primary btn-block mt-4" onclick="guardarLotes();" data-toggle="button" aria-pressed="false" autocomplete="off">Guardar</button>
-                        </div>
+<div class="container mt-5">
+    <div class="card col-md-7 mx-auto border-primary shadow">
+        <div class="card-body">
+            <form>
+                <fieldset>
+                    <legend class="text-center">Registrar Lotes</legend>
+                    <div class="form-group">
+                        <label for="lote" class="form-label mt-6">Existencias:</label>
+                        <input type="number" class="form-control" id="lote"
+                               placeholder="Escribe número de exitencias del lote">
+                    </div>
+                    <div class="form-group">
+                        <label for="cad_lote" class="form-label mt-4">Fecha de caducidad:</label>
+                        <input type="date" class="form-control" id="cad_lote"
+                               placeholder="Escribe la fecha de caducidad del lote" autocomplete="off">
+                    </div>
+                    <div class="form-group">
+                        <label for="fab_lote" class="form-label mt-4">Fecha de fabricación:</label>
+                        <input type="date" class="form-control" id="fab_lote"
+                               placeholder="Escribe la fecha de fabricación del lote" autocomplete="off">
+                    </div>
+                    <div class="form-group">
+                        <label for="nombre_med" class="form-label mt-4">Nombre del medicamento:</label>
+                        <input type="text" class="form-control" id="nombre_med"
+                               placeholder="Escribe el nombre del medicamento" autocomplete="off">
+                    </div>
+                    <div class="form-group">
+                        <button type="button" class="btn btn-primary btn-block mt-4" onclick="guardarLotes();"
+                                data-toggle="button" aria-pressed="false" autocomplete="off">Guardar
+                        </button>
+                    </div>
 
-                    </fieldset>
-                </form>
-            </div>
+                </fieldset>
+            </form>
         </div>
     </div>
-</body>
-</html>
+</div>
