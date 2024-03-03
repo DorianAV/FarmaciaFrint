@@ -1,173 +1,87 @@
-// Lux 5.3.2
+// Darkly 5.3.3
 // Bootswatch
 
 
 // Variables
 
-$web-font-path: "https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@200;300;400;500;600;700&display=swap" !default;
+$web-font-path: "https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,700;1,400&display=swap" !default;
 @if $web-font-path {
-  @import url($web-font-path);
-}
-
-// Navbar
-
-.navbar {
-  font-size: $font-size-sm;
-  font-weight: 600;
-  text-transform: uppercase;
-
-  &-nav {
-    .nav-link {
-      padding-top: .715rem;
-      padding-bottom: .715rem;
-    }
-  }
-
-  &-brand {
-    margin-right: 2rem;
-  }
-}
-
-.bg-light {
-  border: 1px solid rgba(0, 0, 0, .1);
-
-  &.navbar-fixed-top {
-    border-width: 0 0 1px;
-  }
-
-  &.navbar-bottom-top {
-    border-width: 1px 0 0;
-  }
-}
-
-.nav-item {
-  margin-right: 2rem;
-}
-
-// Buttons
-
-.btn {
-  font-size: $font-size-sm;
-  text-transform: uppercase;
-
-  &-sm {
-    font-size: 10px;
-  }
-
-  &-warning {
-    &,
-    &:hover,
-    &:not([disabled]):not(.disabled):active,
-    &:focus {
-      color: $white;
-    }
-  }
-}
-
-.btn-outline-secondary {
-  color: $gray-600;
-  border-color: $gray-600;
-
-  &:not([disabled]):not(.disabled):hover,
-  &:not([disabled]):not(.disabled):focus,
-  &:not([disabled]):not(.disabled):active {
-    color: $white;
-    background-color: $gray-400;
-    border-color: $gray-400;
-  }
-
-  &:not([disabled]):not(.disabled):focus {
-    box-shadow: 0 0 0 .2rem rgba($gray-400, .5);
-  }
-}
-
-[class*="btn-outline-"] {
-  border-width: 2px;
-}
-
-.border-secondary {
-  border: 1px solid $gray-400 !important;
+  @import url("#{$web-font-path}");
 }
 
 // Typography
 
-body {
-  letter-spacing: 1px;
-}
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  text-transform: uppercase;
-  letter-spacing: 3px;
-}
-
-.text-secondary {
-  color: $body-color !important;
-}
-
-// Tables
-
-th {
-  font-size: $font-size-sm;
-  text-transform: uppercase;
-}
-
-.table {
-  th,
-  td {
-    padding: 1.5rem;
+.blockquote {
+  &-footer {
+    color: $gray-600;
   }
+}
 
-  &-sm {
-    th,
-    td {
-      padding: .75rem;
-    }
+// Forms
+
+@include color-mode(dark) {
+  .input-group-text {
+    // color: $white;
+  }
+}
+
+.form-floating {
+  > label,
+  > .form-control:focus ~ label,
+  > .form-control:not(:placeholder-shown) ~ label {
+    color: $input-placeholder-color;
   }
 }
 
 // Navs
 
-.dropdown-menu {
-  font-size: $font-size-sm;
-  text-transform: none;
+.nav-tabs,
+.nav-pills {
+  .nav-link,
+  .nav-link.active,
+  .nav-link.active:focus,
+  .nav-link.active:hover,
+  .nav-item.open .nav-link,
+  .nav-item.open .nav-link:focus,
+  .nav-item.open .nav-link:hover {
+    color: $white;
+  }
+}
+
+.breadcrumb a {
+  color: $white;
+}
+
+.pagination {
+  a:hover {
+    text-decoration: none;
+  }
 }
 
 // Indicators
 
-.badge {
-  padding-top: .28rem;
+.alert {
+  color: $white;
+  border: none;
 
-  &-pill {
-    border-radius: 10rem;
+  a,
+  .alert-link {
+    color: $white;
+    text-decoration: underline;
   }
 
-  &.bg-secondary,
-  &.bg-light {
-    color: $dark;
+  @each $color, $value in $theme-colors {
+    &-#{$color} {
+      @if $enable-gradients {
+        background: $value linear-gradient(180deg, mix($white, $value, 15%), $value) repeat-x;
+      } @else {
+        background-color: $value;
+      }
+    }
   }
 }
 
-// Containers
-
-.list-group-item,
-.card {
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6,
-  .h1,
-  .h2,
-  .h3,
-  .h4,
-  .h5,
-  .h6 {
-    color: inherit;
-  }
+.tooltip {
+  --bs-tooltip-bg: var(--bs-tertiary-bg);
+  --bs-tooltip-color: var(--bs-emphasis-color);
 }

@@ -1,60 +1,86 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script type="text/javascript" src="js/jquery-3.7.1.js"></script>
-    <script type="text/javascript" src="js/bootstrap.bundle.js"></script>
-    <script type="text/javascript" src="js/jquery.validate.min.js"></script>
-    <link type="text/css" rel="Stylesheet" href="css/bootstrap.css">
-    <title>Usuarios</title>
-</head>
-<body>
-    <div class="container mt-5">
-        <div class="card col-md-7 mx-auto border-primary shadow">
-            <div class="card-body">
-                <form>
-                    <fieldset>
-                        <legend class="text-center">Registrar Usuarios</legend>
-                        <div class="form-group">
-                            <label for="nom_usu" class="form-label mt-6">Nombre del usuario:</label>
-                            <input type="text" class="form-control" id="nom_usu" placeholder="Escribe tu nombre">
-                        </div>
-                        <div class="form-group">
-                            <label for="ape_pat" class="form-label mt-4">Apellido paterno:</label>
-                            <input type="text" class="form-control" id="ape_pat" placeholder="Escribe tu apellido paterno" autocomplete="off">
-                        </div>
-                        <div class="form-group">
-                            <label for="ape_mat" class="form-label mt-4">Apellido materno:</label>
-                            <input type="text" class="form-control" id="ape_mat" placeholder="Escribe tu apellido materno" autocomplete="off">
-                        </div>
-                        <div class="form-group">
-                            <label for="password" class="form-label mt-4">Contraseña:</label>
-                            <input type="password" class="form-control" id="password" placeholder="Escribe tu contraseña" autocomplete="off">
-                        </div>
-                        <div class="form-group">
-                            <label for="email" class="form-label mt-4">Correo:</label>
-                            <input type="email" class="form-control" id="email" placeholder="Escribe tu correo electrónico" autocomplete="off">
-                        </div>
-                        <div class="form-group">
-                            <label for="nombreusu" class="form-label mt-4">Nombre de usuario:</label>
-                            <input type="text" class="form-control" id="nombreusu" placeholder="Escribe tu nombre de usuario" autocomplete="off">
-                        </div>
-                        <div class="form-group">
-                            <label for="rol_usu" class="form-label mt-4">Rol de usuario:</label>
-                            <input type="text" class="form-control" id="rol_usu" placeholder="Escribe el rol correspondiente" autocomplete="off">
-                        </div>
-                        <div class="form-group">
-                            <label for="tel_usu" class="form-label mt-4">Teléfono:</label>
-                            <input type="text" class="form-control" id="tel_usu" placeholder="Escribe tu número de teléfono" autocomplete="off">
-                        </div>
-                        <div class="form-group">
-                            <button type="button" class="btn btn-primary btn-block mt-4" onclick="guardarUsuario();" data-toggle="button" aria-pressed="false" >Guardar</button>
-                        </div>
-                    </fieldset>
-                </form>
-            </div>
+<script>
+    function guardarUsuario() {
+        var datos = {
+            usuario:$("#usuario").val(),
+            nombre:$("#nombre").val(),
+            apellido_pat:$("#apellido_pat").val(),
+            apellido_mat:$("#apellido_mat").val(),
+            correo:$("#email").val(),
+            contraseña:$("#password").val(),
+            telefono:$("#telefono_usuario").val(),
+            rol:$("#rol_usu").val()
+        }
+        $.ajax({
+            url: backend + "usuario/registro",
+            type: 'post',
+            datatype: 'json',
+            data:JSON.stringify(datos),
+            contentType:'application/json',
+            xhrFields: { withCredentials: true },
+            success: function (respuesta) {
+                console.log(respuesta);
+                alert(respuesta);
+            }
+        });
+    }
+</script>
+
+
+<div class="container mt-5">
+    <div class="card col-md-7 mx-auto border-primary shadow">
+        <div class="card-body">
+            <form>
+                <fieldset>
+                    <legend class="text-center">Registrar Usuarios</legend>
+                    <div class="form-group">
+                        <label for="nombre" class="form-label mt-6">Nombre del usuario:</label>
+                        <input type="text" class="form-control" id="nombre" placeholder="Escribe tu nombre">
+                    </div>
+                    <div class="form-group">
+                        <label for="apellido_pat" class="form-label mt-4">Apellido paterno:</label>
+                        <input type="text" class="form-control" id="apellido_pat" placeholder="Escribe tu apellido paterno"
+                               autocomplete="off">
+                    </div>
+                    <div class="form-group">
+                        <label for="apellido_mat" class="form-label mt-4">Apellido materno:</label>
+                        <input type="text" class="form-control" id="apellido_mat" placeholder="Escribe tu apellido materno"
+                               autocomplete="off">
+                    </div>
+                    <div class="form-group">
+                        <label for="password" class="form-label mt-4">Contraseña:</label>
+                        <input type="password" class="form-control" id="password" placeholder="Escribe tu contraseña"
+                               autocomplete="off">
+                    </div>
+                    <div class="form-group">
+                        <label for="email" class="form-label mt-4">Correo:</label>
+                        <input type="email" class="form-control" id="email" placeholder="Escribe tu correo electrónico"
+                               autocomplete="off">
+                    </div>
+                    <div class="form-group">
+                        <label for="usuario" class="form-label mt-4">Nombre de usuario:</label>
+                        <input type="text" class="form-control" id="usuario"
+                               placeholder="Escribe tu nombre de usuario" autocomplete="off">
+                    </div>
+                    <div class="form-group">
+                        <label for="rol_usu" class="form-label mt-4">Rol de usuario:</label>
+                        <select class="form-control" id="rol_usu">
+                            <option value="administrador">Administrador</option>
+                            <option value="empleado">Empleado</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="telefono_usuario" class="form-label mt-4">Teléfono:</label>
+                        <input type="text" class="form-control" id="telefono_usuario" placeholder="Escribe tu número de teléfono"
+                               autocomplete="off">
+                    </div>
+                    <div class="form-group">
+                        <button type="button" class="btn btn-primary btn-block mt-4" onclick="guardarUsuario();"
+                                data-toggle="button" aria-pressed="false">Guardar
+                        </button>
+                    </div>
+                </fieldset>
+            </form>
         </div>
     </div>
-</body>
-</html>
+</div>
