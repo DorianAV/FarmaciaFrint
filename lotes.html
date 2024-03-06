@@ -26,7 +26,7 @@
 
     function consultarMedicamentos() {
         $.ajax({
-            url: backend + "medicamentos/listar",
+            url: backend + "medicamento/listar",
             type: 'post',
             datatype: 'json',
             xhrFields: {withCredentials: true},
@@ -41,7 +41,7 @@
         $.each(lista, function (i, med) {
             $('#Medicamento').append($('<option>', {
                 value: med.codigo_de_barras,
-                text: med.nombre + med.sustancia_activa + med.dosis + med.via_de_administracion
+                text: med.nombre + " " + med.sustancia_activa + " " + med.dosis + " " + med.via_de_administracion
             }));
         });
     }
