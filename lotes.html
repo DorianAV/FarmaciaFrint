@@ -5,13 +5,14 @@
 
     function registrarLotes() {
         var datos = {
+            lote: $("#lote").val(),
             existencia: $("#existencia").val(),
             fecha_caducidad: $("#cad_lote").val(),
             fecha_fabricacion: $("#fab_lote").val(),
-            medicamento: $("#Medicamento").val()
+            medicamento: {codigoDeBarras: $("#Medicamento").val()}
         }
         $.ajax({
-            url: backend + "fabricante/registro",
+            url: backend + "lote/registro",
             type: 'post',
             datatype: 'json',
             data: JSON.stringify(datos),
@@ -40,7 +41,7 @@
     function mostrarMedicamentos(lista) {
         $.each(lista, function (i, med) {
             $('#Medicamento').append($('<option>', {
-                value: med.codigo_de_barras,
+                value: med.codigoDeBarras,
                 text: med.nombre + " " + med.sustancia_activa + " " + med.dosis + " " + med.via_de_administracion
             }));
         });
@@ -53,9 +54,13 @@
                 <fieldset>
                     <legend class="text-center">Registrar Lotes</legend>
                     <div class="form-group">
-                        <label for="existencia" class="form-label mt-6">Existencias:</label>
-                        <input type="number" class="form-control" id="existencia"
-                               placeholder="Escribe número de exitencias del lote">
+                        <label for="lote" class="form-label mt-4">Lote:</label>
+                        <input type="text" class="form-control" id="lote"
+                               placeholder="Escribe el lote del medicamento" autocomplete="off">
+                    </div>
+                    <div class="form-group">
+                        <label for="Medicamento" class="form-label mt-4">Nombre del medicamento:</label>
+                        <select class="form-select" id="Medicamento"></select>
                     </div>
                     <div class="form-group">
                         <label for="cad_lote" class="form-label mt-4">Fecha de caducidad:</label>
@@ -63,13 +68,14 @@
                                placeholder="Escribe la fecha de caducidad del lote" autocomplete="off">
                     </div>
                     <div class="form-group">
+                        <label for="existencia" class="form-label mt-6">Existencias:</label>
+                        <input type="number" class="form-control" id="existencia"
+                               placeholder="Escribe número de exitencias del lote">
+                    </div>
+                    <div class="form-group">
                         <label for="fab_lote" class="form-label mt-4">Fecha de fabricación:</label>
                         <input type="date" class="form-control" id="fab_lote"
                                placeholder="Escribe la fecha de fabricación del lote" autocomplete="off">
-                    </div>
-                    <div class="form-group">
-                        <label for="Medicamento" class="form-label mt-4">Nombre del medicamento:</label>
-                        <select class="form-select" id="Medicamento"></select>
                     </div>
                     <div class="form-group">
                         <button type="button" class="btn btn-primary btn-block mt-4" onclick="registrarLotes();"
