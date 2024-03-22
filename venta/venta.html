@@ -1,0 +1,46 @@
+<script>
+    $(function () {
+        $('#divDetalle').load('venta/detalle.html')
+        $('#cajaCodigo').focus();
+    });
+
+    var isSearching = false;
+
+    function buscarCodigo(event) {
+        if (event.key == 'Enter' && !isSearching) {
+            isSearching = true;
+            var datos = {
+                codigoDeBarras: $('#cajaCodigo').val()
+            }
+            $.ajax({
+                url: backend + "venta/buscarCodigo",
+                type: 'post',
+                datatype: 'json',
+                data: JSON.stringify(datos),
+                contentType: 'application/json',
+                xhrFields: { withCredentials: true },
+                success: function (respuesta) {
+                    console.log(respuesta);
+                    $('#divDetalle').load('venta/detalle.html', function () {
+                        isSearching = false;
+                    });
+                    setTimeout(function () { }, 500);
+                },
+                error: function () {
+                    isSearching = false;
+                }
+            });
+        }
+    }
+</script>
+<legend>Ventas</legend>
+<div class="form-group row">
+    <div class="col-auto">
+        <label for="cajaCodigo" class="col-form-label">Codigo</label>
+    </div>
+    <div class="col-auto">
+        <input type="text" class="form-control" id="cajaCodigo" size="30" placeholder="Capture el codigo de barras"
+               onkeypress="buscarCodigo(event);">
+    </div>
+</div>
+<div id="divDetalle"></div>

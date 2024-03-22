@@ -1,0 +1,151 @@
+<script>
+    $(function () {
+
+        consultarVenta();
+
+    });
+    function consultarVenta() {
+        $.ajax({
+            url: backend + "venta/consultarVenta",
+            type: 'post',
+            datatype: 'json',
+            xhrFields: { withCredentials: true },
+            success: function (respuesta) {
+                console.log(respuesta);
+                mostrarCarrito(respuesta);
+
+            }
+        });
+    }
+
+    function limpiarVenta() {
+        $.ajax({
+            url: backend + "venta/limpiarVenta",
+            type: 'post',
+            datatype: 'json',
+            xhrFields: { withCredentials: true },
+            success: function (respuesta) {
+                console.log(respuesta);
+                $('#divDetalle').load('venta/detalle.html')
+
+            }
+        });
+    }
+
+    function realizaVenta(){
+        $.ajax({
+            url: backend + "venta/realizarVenta",
+            type: 'post',
+            datatype: 'json',
+            xhrFields: { withCredentials: true },
+            success: function (respuesta) {
+                console.log(respuesta);
+                $('#divDetalle').load('venta/detalle.html')
+
+            }
+        });
+    }
+
+    function eliminarDetalle(i){
+        $.ajax({
+            url: backend + "venta/eliminarDetalle/"+i,
+            type: 'post',
+            datatype: 'json',
+            xhrFields: { withCredentials: true },
+            success: function (respuesta) {
+                console.log(respuesta);
+                $('#divDetalle').load('venta/detalle.html')
+
+            }
+        });
+    }
+
+    function actualizarCantidad(i, c){
+        $.ajax({
+            url: backend + "venta/actualizarCantidad/"+i+"&"+c,
+            type: 'post',
+            datatype: 'json',
+            xhrFields: { withCredentials: true },
+            success: function (respuesta) {
+                console.log(respuesta);
+                $('#divDetalle').load('venta/detalle.html')
+
+            }
+        });
+    }
+
+    function mostrarCarrito(venta) {
+        var body = '';
+        $.each(venta['detalles'], function (i, detalle) {
+            body += '<tr class="table-' + ((i % 2 == 0) ? 'primary' : 'secondary') + '">' +
+                '<td scope="row">' + detalle.lote.lote + '</td>' +
+                '<td scope="row">' + detalle.lote.medicamento.nombre + '</td>' +
+                '<td scope="row">' + detalle.lote.medicamento.sustancia_activa + '</td>' +
+                '<td scope="row">' + detalle.lote.medicamento.fabricanteDTO.nombre + '</td>' +
+                '<td scope="row">' + detalle.lote.medicamento.dosis + '</td>' +
+                '<td scope="row">' + detalle.lote.medicamento.via_de_administracion + '</td>' +
+                '<td scope="row">' + detalle.lote.fechaCaducidad + '</td>' +
+                '<td scope="row">$' + detalle.precio_unitario + '</td>' +
+                '<td scope="row">' + detalle.lote.medicamento.codigoDeBarras + '</td>' +
+                '<td scope="row">' +
+                '<button type="button" class="btn btn-info m-1 mcantidad" onclick="actualizarCantidad(' + i + ',-1);" >-1</button><strong>' +
+                detalle.cantidad +
+                '</strong><button type="button" class="btn btn-info m-1 mcantidad" onclick="actualizarCantidad(' + i + ', 1);" >+1</button>' +
+                '<button type="button" class="btn btn-info m-1 mcantidad" onclick="actualizarCantidad(' + i +', 5)"  >+5</button>' +
+                '<button type="button" class="btn btn-info m-1 mcantidad" onclick="actualizarCantidad(' + i + ', 10)" >+10</button>' +
+                '</td>' +
+                '<td scope="row">$' + detalle.subtotal + '</td>' +
+                '<td scope="row"><button type="button" class="btn btn-danger btnelimina" onclick="eliminarDetalle(' + i + ');">Eliminar</button></td>' +
+                '</tr>';
+        });
+
+        $('#carrito > tbody').html(body);
+        $('#campoTotal').html("$" + venta.total);
+        if (venta.detalles.length > 0) {
+            // Verificamos si la venta ya se realizó
+            if(!venta.ventaRealizada){
+                $('#botonVenta').show();
+            } else {
+                // Si la venta ya se realizó, ocultamos los botones
+                $('.btnelimina').hide();
+                $('.mcantidad').hide();
+            }
+            $('#botonLimpiar').show();
+        }
+    }
+    $('#botonVenta').hide();
+    $('#botonLimpiar').hide();
+</script>
+
+<table class="table table-hover" id="carrito">
+    <thead>
+    <tr>
+        <th scope="col">Lote</th>
+        <th scope="col">Nombre Medicamento</th>
+        <th scope="col">Sustancia Activa</th>
+        <th scope="col">Fabricante</th>
+        <th scope="col">Dosis</th>
+        <th scope="col">Via de Administracion</th>
+        <th scope="col">Fecha de caducidad</th>
+        <th scope="col">Precio</th>
+        <th scope="col">Codigo de Barras</th>
+        <th scope="col">Cantidad</th>
+    </tr>
+    </thead>
+    <tbody>
+    </tbody>
+    <tfoot>
+    <tr class="table-info">
+        <th scope="row"></th>
+        <td></td><td></td><td></td><td></td>
+        <td>Total: </td>
+        <td id="campoTotal"></td>
+        <td></td>
+    </tr>
+    </tfoot>
+</table>
+
+<div class="d-flex justify-content-center">
+    <button type="button" id="botonVenta" class="btn btn-success" onclick="realizaVenta();">Realizar Venta</button>
+    <button type="button" id="botonLimpiar" class="btn btn-warning" onclick="limpiarVenta();">Limpiar venta</button>
+</div>
