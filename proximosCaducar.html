@@ -1,13 +1,13 @@
 <script>
     $(function () {
-        consultarCaducados();
+        consultarMedicamentos();
     });
 
-    function consultarCaducados() {
+    function consultarMedicamentos() {
 
 
         $.ajax({
-            url: backend + "medicamento/caducados",
+            url: backend + "medicamento/promos",
             type: 'post',
             dataType: 'json',
             xhrFields: {withCredentials: true},

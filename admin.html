@@ -22,26 +22,27 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarColor01">
             <ul class="navbar-nav me-auto">
-                <li class="nav-item">
-                    <a class="nav-link active" href="#">Home
-                        <span class="visually-hidden">(current)</span>
-                    </a>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Medicamentos</a>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" onclick="$('#divPrincipal').load('medicamentos.html')">Registrar Medicamentos</a>
+                        <a class="dropdown-item" onclick="$('#divPrincipal').load('filtrarMedicamentos.html');">Mostrar Medicamentos</a>
+                        <a class="dropdown-item" onclick="$('#divPrincipal').load('proximosCaducar.html');">Medicamentos Proximos a Caducar</a>
+                        <a class="dropdown-item" onclick="$('#divPrincipal').load('reporteCaducados.html');">Medicamentos Caducados</a>
+                    </div>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Features</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Pricing</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" onclick="$('#divPrincipal').load('reporteCaducados.html');">Caducados</a>
+
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Lotes</a>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" onclick="$('#divPrincipal').load('listarMedicamentos.html');">Mostrar lotes Medicamentos</a>
+                        <a class="dropdown-item" onclick="$('#divPrincipal').load('lotes.html')">Compras</a>
+                    </div>
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Registrar</a>
                     <div class="dropdown-menu">
                         <a class="dropdown-item" onclick="$('#divPrincipal').load('fabricantes.html');">Fabricantes</a>
-                        <a class="dropdown-item" onclick="$('#divPrincipal').load('lotes.html')">Compras</a>
-                        <a class="dropdown-item" onclick="$('#divPrincipal').load('medicamentos.html')">Medicamentos</a>
                         <a class="dropdown-item" onclick="$('#divPrincipal').load('usuarios.html')">Usuarios</a>
                     </div>
                 </li>
