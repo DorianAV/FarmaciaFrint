@@ -8,6 +8,7 @@
             precio: $("#precio_med").val()
             // estatus: $("#estatus_med").val(),
         }
+        console.log(datos);
         $.ajax({
             url: backend + "medicamento/actualizar",
             type: 'post',
@@ -28,7 +29,7 @@
     <form>
         <fieldset>
             <legend class="text-center">Medicamentos</legend>
-            <input type="text" id="codigo_med" hidden>
+            <input type="number" id="codigo_med" hidden>
             <div class="form-group">
                 <label for="dosis" class="form-label mt-4">Dosis:</label>
                 <input type="number" class="form-control" id="dosis" placeholder="Dosis correspondiente"
@@ -45,13 +46,13 @@
                        placeholder="Escribe el precio del medicamento" step="any"
                        title="Solo se permiten números decimales con dos cifras decimales">
             </div>
-<!--            <div class="form-group">-->
-<!--                <label for="estatus_med" class="form-label mt-4">Estatus:</label>-->
-<!--                <select class="form-control" id="estatus_med">-->
-<!--                    <option value="1">Activo</option>-->
-<!--                    <option value="0">Inactivo</option>-->
-<!--                </select>-->
-<!--            </div>-->
+            <div class="form-group">
+                <label for="estatus_med" class="form-label mt-4">Estatus:</label>
+                <select class="form-control" id="estatus_med">
+                    <option value="1">Activo</option>
+                    <option value="0">Inactivo</option>
+                </select>
+            </div>
             <div class="form-group">
                 <button type="button" class="btn btn-primary btn-block mt-4" onclick="actualizarMedicamentos();"
                         data-toggle="button" aria-pressed="false">Guardar

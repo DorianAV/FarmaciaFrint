@@ -32,7 +32,8 @@
               '<td scope="row">' + med.medicamento.dosis +'mg'+ '</td>' +
               '<td scope="row">' + med.medicamento.via_de_administracion + '</td>' +
               '<td scope="row">' + med.medicamento.precio + '</td>' +
-              '<td scope="row">' + med.fecha_caducidad + '</td>' +
+              '<td scope="row">' + med.existencia + '</td>' +
+              '<td scope="row">' + med.fechaCaducidad + '</td>' +
               '</tr>';
     });
     $('#tmedcaducados > tbody').html(body);
@@ -49,6 +50,7 @@
     <th scope="col">Dosis</th>
     <th scope="col">Via de Administracion</th>
     <th scope="col">Precio</th>
+    <th scope="col">Existencia</th>
     <th scope="col">Fecha de Caducidad</th>
   </tr>
   </thead>

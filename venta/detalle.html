@@ -81,20 +81,15 @@
                 '<td scope="row">' + detalle.lote.lote + '</td>' +
                 '<td scope="row">' + detalle.lote.medicamento.nombre + '</td>' +
                 '<td scope="row">' + detalle.lote.medicamento.sustancia_activa + '</td>' +
-                '<td scope="row">' + detalle.lote.medicamento.fabricanteDTO.nombre + '</td>' +
+                // '<td scope="row">' + detalle.lote.medicamento.fabricanteDTO.nombre + '</td>' +
                 '<td scope="row">' + detalle.lote.medicamento.dosis + '</td>' +
                 '<td scope="row">' + detalle.lote.medicamento.via_de_administracion + '</td>' +
                 '<td scope="row">' + detalle.lote.fechaCaducidad + '</td>' +
                 '<td scope="row">$' + detalle.precio_unitario + '</td>' +
                 '<td scope="row">' + detalle.lote.medicamento.codigoDeBarras + '</td>' +
                 '<td scope="row">' +
-                '<button type="button" class="btn btn-info m-1 mcantidad" onclick="actualizarCantidad(' + i + ',-1);" >-1</button><strong>' +
                 detalle.cantidad +
-                '</strong><button type="button" class="btn btn-info m-1 mcantidad" onclick="actualizarCantidad(' + i + ', 1);" >+1</button>' +
-                '<button type="button" class="btn btn-info m-1 mcantidad" onclick="actualizarCantidad(' + i +', 5)"  >+5</button>' +
-                '<button type="button" class="btn btn-info m-1 mcantidad" onclick="actualizarCantidad(' + i + ', 10)" >+10</button>' +
                 '</td>' +
-                '<td scope="row">$' + detalle.subtotal + '</td>' +
                 '<td scope="row"><button type="button" class="btn btn-danger btnelimina" onclick="eliminarDetalle(' + i + ');">Eliminar</button></td>' +
                 '</tr>';
         });
@@ -123,7 +118,7 @@
         <th scope="col">Lote</th>
         <th scope="col">Nombre Medicamento</th>
         <th scope="col">Sustancia Activa</th>
-        <th scope="col">Fabricante</th>
+<!--        <th scope="col">Fabricante</th>-->
         <th scope="col">Dosis</th>
         <th scope="col">Via de Administracion</th>
         <th scope="col">Fecha de caducidad</th>
@@ -141,6 +136,8 @@
         <td>Total: </td>
         <td id="campoTotal"></td>
         <td></td>
+        <td>
+        </td>td
     </tr>
     </tfoot>
 </table>

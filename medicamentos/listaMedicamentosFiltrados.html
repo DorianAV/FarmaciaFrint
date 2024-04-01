@@ -28,19 +28,21 @@
         $.each(lista, function (i, med) {
             body += '<tr class="table-' + ((i % 2 == 0) ? 'light' : 'secondary') + '">' +
                 '<td scope="row">' + med.nombre + '</td>' +
+                '<td scope="row">' + med.codigoDeBarras + '</td>' +
                 '<td scope="row">' + med.fabricanteDTO.nombre + '</td>' +
                 '<td scope="row">' + med.sustancia_activa + '</td>' +
                 '<td scope="row">' + med.dosis + 'mg' + '</td>' +
                 '<td scope="row">' + med.via_de_administracion + '</td>' +
                 '<td scope="row">' + med.precio + '</td>' +
-                // '<td><button class="btn btn-primary" onclick="editarMedicamento(\'' + med.codigoDeBarras + '\')">Editar</button></td>' +
+                // '    <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#nuevoUsuarioModal" onclick="$(\'#nuevoUsuario\').load(\'usuarios/nuevo.html\')">Nuevo</button>\n'
+                '<td><button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modificarMedicamentoModal" onclick="editarMedicamento(' + med.codigoDeBarras + ')">Editar</button></td>' +
                 '</tr>';
         });
         $('#tmedcaducados > tbody').html(body);
     }
 
     function editarMedicamento(codigoDeBarras) {
-        $('#ModificarMedicamento').load('ModificarMedicamento.html');
+        $('#ModificarMedicamento').load('medicamentos/ModificarMedicamento.html');
         $.ajax({
             url: backend + "medicamento/obtener",
             type: 'post',
@@ -49,9 +51,11 @@
             contentType: 'application/json',
             xhrFields: { withCredentials: true },
             success: function (respuesta) {
+                console.log(respuesta);
                 $('#dosis').val(respuesta.dosis);
                 $('#nombre_med').val(respuesta.nombre);
                 $('#precio_med').val(respuesta.precio);
+                $('#codigo_med').val(respuesta.codigoDeBarras);
             }
         });
     }
@@ -63,15 +67,23 @@
         <thead>
         <tr class="table-active">
             <th scope="col">Nombre</th>
+            <th scope="col">Codigo de barrras</th>
             <th scope="col">Fabricante</th>
             <th scope="col">Sustancia Activa</th>
             <th scope="col">Dosis</th>
             <th scope="col">Via de Administracion</th>
             <th scope="col">Precio</th>
-<!--            <th scope="col">Acciones</th>-->
+            <th scope="col">Acciones</th>
         </tr>
         </thead>
         <tbody>
         </tbody>
     </table>
+</div>
+<div class="modal fade" id="modificarMedicamentoModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content" id="ModificarMedicamento">
+
+        </div>
+    </div>
 </div>
