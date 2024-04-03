@@ -7,6 +7,7 @@
         var datos = {
             texto: $('#cajaNombre').val()
         };
+
         console.log(datos);
         $.ajax({
             url: backend + "medicamento/filtrar",
@@ -26,6 +27,7 @@
         var body = '';
         console.log(lista);
         $.each(lista, function (i, med) {
+            var estatus = med.estatus ? 'Activo' : 'Inactivo';
             body += '<tr class="table-' + ((i % 2 == 0) ? 'light' : 'secondary') + '">' +
                 '<td scope="row">' + med.nombre + '</td>' +
                 '<td scope="row">' + med.codigoDeBarras + '</td>' +
@@ -33,7 +35,8 @@
                 '<td scope="row">' + med.sustancia_activa + '</td>' +
                 '<td scope="row">' + med.dosis + 'mg' + '</td>' +
                 '<td scope="row">' + med.via_de_administracion + '</td>' +
-                '<td scope="row">' + med.precio + '</td>' +
+                '<td scope="row">' +'$'+ med.precio + '</td>' +
+                '<td scope="row">' + estatus + '</td>' +
                 // '    <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#nuevoUsuarioModal" onclick="$(\'#nuevoUsuario\').load(\'usuarios/nuevo.html\')">Nuevo</button>\n'
                 '<td><button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modificarMedicamentoModal" onclick="editarMedicamento(' + med.codigoDeBarras + ')">Editar</button></td>' +
                 '</tr>';
@@ -73,6 +76,7 @@
             <th scope="col">Dosis</th>
             <th scope="col">Via de Administracion</th>
             <th scope="col">Precio</th>
+            <th scope="col">Estatus</th>
             <th scope="col">Acciones</th>
         </tr>
         </thead>
