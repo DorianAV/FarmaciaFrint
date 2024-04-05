@@ -1,0 +1,57 @@
+<script>
+    function actualizarMedicamentos() {
+        var datos = {
+            lote: $("#lote").val(),
+            existencia: $("#existencia").val(),
+            estatus: $("#estatus").val(),
+        }
+        console.log(datos);
+        $.ajax({
+            url: backend + "lote/actualizar",
+            type: 'post',
+            datatype: 'json',
+            data: JSON.stringify(datos),
+            contentType: 'application/json',
+            xhrFields: {withCredentials: true},
+            success: function (respuesta) {
+                console.log(respuesta);
+                alert(respuesta);
+            }
+        });
+    }
+</script>
+<div class="modal-header">
+    <h1 class="modal-title fs-5" id="exampleModalLabel">Modificar Medicamento</h1>
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onclick="$('#divListado').load('medicamentos/listaMedicamentosFiltrados.html')"></button>
+
+</div>
+<div class="modal-body">
+    <form>
+        <fieldset>
+            <legend class="text-center">Lotes</legend>
+            <input type="number" id="lote" hidden>
+            <div class="form-group">
+                <label for="existencia" class="form-label mt-4">Existencia:</label>
+                <input type="number" class="form-control" id="existencia" placeholder="Dosis correspondiente"
+                       autocomplete="off">
+            </div>
+            <div class="form-group">
+                <label for="estatus" class="form-label mt-4">Estatus:</label>
+                <select class="form-control" id="estatus">
+                    <option value="true">Activo</option>
+                    <option value="false">Inactivo</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <button type="button" class="btn btn-primary btn-block mt-4" onclick="actualizarMedicamentos();"
+                        data-toggle="button" aria-pressed="false">Guardar
+                </button>
+            </div>
+
+        </fieldset>
+    </form>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onclick="$('#divPrincipal').load('lotes/listarMedicamentos.html')">Cerrar
+    </button>
+</div>
