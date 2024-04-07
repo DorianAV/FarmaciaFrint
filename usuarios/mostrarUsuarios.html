@@ -24,31 +24,75 @@
         var body = '';
         console.log(lista);
         $.each(lista, function (i, usu) {
+            var estatus = usu.estatus ? 'Activo' : 'Inactivo';
             body += '<tr class="table-' + ((i % 2 == 0) ? 'light' : 'secondary') + '">' +
+                '<td scope="row">' + usu.usuario + '</td>' +
                 '<td scope="row">' + usu.nombre + '</td>' +
                 '<td scope="row">' + usu.apellido_pat + '</td>' +
                 '<td scope="row">' + usu.apellido_mat + '</td>' +
                 '<td scope="row">' + usu.correo+ '</td>' +
                 '<td scope="row">' + usu.telefono + '</td>' +
                 '<td scope="row">' + usu.rol + '</td>' +
+                '<td scope="row">' + estatus + '</td>' +
+                '<td><button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modificarMedicamentoModal" onclick="editarUsuario(\'' + usu.usuario + '\')">Editar</button></td>' +
                 '</tr>';
         });
-        $('#tmedcaducados > tbody').html(body);
+        $('#tusuarios > tbody').html(body);
+    }
+
+
+    function editarUsuario(usuario) {
+        $('#ModificarMedicamento').load('usuarios/ModificarUsuario.html');
+        $.ajax({
+            url: backend + "usuario/obtener",
+            type: 'post',
+            dataType: 'json',
+            data: JSON.stringify({ usuario: usuario }),
+            contentType: 'application/json',
+            xhrFields: { withCredentials: true },
+            success: function (respuesta) {
+                console.log(respuesta);
+                $('#usuario').val(respuesta.usuario);
+                $('#nombre').val(respuesta.nombre);
+                $('#apellido_pat').val(respuesta.apellido_pat);
+                $('#apellido_mat').val(respuesta.apellido_mat);
+                $('#password').val(respuesta.password);
+                $('#email').val(respuesta.correo);
+                $('#rol_usu').val(respuesta.rol);
+                $('#telefono_usuario').val(respuesta.telefono);
+                if (respuesta.estatus === true) {
+                    $('#estatus').val('true');
+                } else {
+                    $('#estatus').val('false');
+                }
+
+            }
+        });
     }
 </script>
 
-<table class="table table-hover" id="tmedcaducados">
+<table class="table table-hover" id="tusuarios">
     <thead>
     <tr class="table-active">
+        <th scope="col">Usuario</th>
         <th scope="col">Nombre</th>
         <th scope="col">Apellido Paterno</th>
         <th scope="col">Apellido Materno</th>
         <th scope="col">Correo</th>
         <th scope="col">Telefono</th>
         <th scope="col">Rol</th>
+        <th scope="col">Estatus</th>
+        <th scope="col">Acciones</th>
     </tr>
     </thead>
     <tbody>
     </tbody>
 </table>
+<div class="modal fade" id="modificarMedicamentoModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content" id="ModificarMedicamento">
+
+        </div>
+    </div>
+</div>
 

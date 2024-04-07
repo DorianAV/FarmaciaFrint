@@ -57,7 +57,11 @@
         console.log(respuesta);
         $('#existencia').val(respuesta.existencia);
         $('#lote').val(respuesta.lote);
-        $('#estatus').val(respuesta.estatus.toString());
+        if (respuesta.estatus === true) {
+          $('#estatus').val('true');
+        } else {
+          $('#estatus').val('false');
+        }
 
       }
     });

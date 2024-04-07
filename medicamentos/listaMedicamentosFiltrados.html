@@ -59,9 +59,13 @@
                 $('#nombre_med').val(respuesta.nombre);
                 $('#precio_med').val(respuesta.precio);
                 $('#codigo_med').val(respuesta.codigoDeBarras);
-                $('#estatus_med').val(respuesta.estatus);
+                console.log(respuesta.estatus);
+
+                $('#estatus').val(respuesta.estatus.toString());
             }
         });
+        console.log($('#estatus').val());
+
     }
 
 </script>

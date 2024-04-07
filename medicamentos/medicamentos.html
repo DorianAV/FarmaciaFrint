@@ -44,10 +44,12 @@
     function mostrarFabricante(lista) {
         console.log(lista);
         $.each(lista, function (i, fab) {
-            $('#fabricante').append($('<option>', {
-                value: fab.uuid,
-                text: fab.nombre
-            }));
+            if (fab.estatus){
+                $('#fabricante').append($('<option>', {
+                    value: fab.uuid,
+                    text: fab.nombre
+                }));
+            }
         });
     }
 </script>

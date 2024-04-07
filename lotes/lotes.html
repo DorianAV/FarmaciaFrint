@@ -40,10 +40,12 @@
 
     function mostrarMedicamentos(lista) {
         $.each(lista, function (i, med) {
-            $('#Medicamento').append($('<option>', {
-                value: med.codigoDeBarras,
-                text: med.nombre + " " + med.sustancia_activa + " " + med.dosis + " " + med.via_de_administracion
-            }));
+            if (med.estatus){
+                $('#Medicamento').append($('<option>', {
+                    value: med.codigoDeBarras,
+                    text: med.nombre + " " + med.sustancia_activa + " " + med.dosis + " " + med.via_de_administracion
+                }));
+            }
         });
     }
 </script>

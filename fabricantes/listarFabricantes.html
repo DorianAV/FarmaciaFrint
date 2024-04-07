@@ -4,8 +4,6 @@
     });
 
     function consultarFabricantes() {
-
-
         $.ajax({
             url: backend + "fabricante/listar",
             type: 'post',
@@ -21,25 +19,62 @@
     }
 
     function mostrarFabricantes(lista) {
+
+
         var body = '';
         console.log(lista);
         $.each(lista, function (i, fab) {
+            var estatus = fab.estatus ? 'Activo' : 'Inactivo';
             body += '<tr class="table-' + ((i % 2 == 0) ? 'light' : 'secondary') + '">' +
                 '<td scope="row">' + fab.nombre + '</td>' +
                 '<td scope="row">' + fab.telefono + '</td>' +
+                '<td scope="row">' + estatus + '</td>' +
+                '<td><button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modificarFabricanteModal" onclick="editarFabricante(\'' + fab.uuid + '\')">Editar</button></td>' +
                 '</tr>';
         });
-        $('#tmedcaducados > tbody').html(body);
+        $('#tfabricantes > tbody').html(body);
+    }
+    function editarFabricante(uuid) {
+        $('#ModificarFabricante').load('fabricantes/ModificarFabricante.html');
+        $.ajax({
+            url: backend + "fabricante/obtener",
+            type: 'post',
+            dataType: 'json',
+            data: JSON.stringify({ uuid: uuid }),
+            contentType: 'application/json',
+            xhrFields: { withCredentials: true },
+            success: function (respuesta) {
+                console.log(respuesta);
+                $('#nombre').val(respuesta.nombre);
+                $('#telefono').val(respuesta.telefono);
+                $('#uuid').val(respuesta.uuid);
+                if (respuesta.estatus === true) {
+                    $('#estatus').val('true');
+                } else {
+                    $('#estatus').val('false');
+                }
+
+            }
+        });
     }
 </script>
 
-<table class="table table-hover" id="tmedcaducados">
+<table class="table table-hover" id="tfabricantes">
     <thead>
     <tr class="table-active">
         <th scope="col">Nombre</th>
         <th scope="col">Telefono</th>
+        <th scope="col">Estatus</th>
+        <th scope="col">Acciones</th>
     </tr>
     </thead>
     <tbody>
     </tbody>
 </table>
+<div class="modal fade" id="modificarFabricanteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content" id="ModificarFabricante">
+
+        </div>
+    </div>
+</div>

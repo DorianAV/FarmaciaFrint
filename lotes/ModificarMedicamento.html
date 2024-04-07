@@ -21,15 +21,15 @@
     }
 </script>
 <div class="modal-header">
-    <h1 class="modal-title fs-5" id="exampleModalLabel">Modificar Medicamento</h1>
-    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onclick="$('#divListado').load('medicamentos/listaMedicamentosFiltrados.html')"></button>
+    <h1 class="modal-title fs-5" id="exampleModalLabel">Modificar Lote</h1>
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onclick="$('#divListado').load('lotes/listarMedicamentos.html')"></button>
 
 </div>
 <div class="modal-body">
     <form>
         <fieldset>
             <legend class="text-center">Lotes</legend>
-            <input type="number" id="lote" hidden>
+            <input type="text" id="lote" hidden>
             <div class="form-group">
                 <label for="existencia" class="form-label mt-4">Existencia:</label>
                 <input type="number" class="form-control" id="existencia" placeholder="Dosis correspondiente"
